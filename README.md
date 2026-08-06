@@ -37,7 +37,8 @@ In MVI Edge, go to **Settings > MQTT** and set:
 
 ## Topic
 
-MVI Edge must publish to the `edge-result` topic. Don't change this; the JSON fixer, Telegraf, and the Grafana dashboard all depend on that exact name.
+MVI Edge must publish to the `edge-result` topic. 
+Don't change this; the JSON fixer, Telegraf, and the Grafana dashboard all depend on that exact name.
 
 ## Notes
 
