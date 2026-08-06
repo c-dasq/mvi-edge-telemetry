@@ -1,0 +1,39 @@
+{
+  "title": "MVI Edge - Detecciones",
+  "uid": "mvi-edge-raw",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 4,
+  "refresh": "5s",
+  "time": { "from": "now-1h", "to": "now" },
+  "panels": [
+    {
+      "id": 1,
+      "type": "table",
+      "title": "Ultimas detecciones",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 0 },
+      "datasource": { "type": "influxdb", "uid": "InfluxDB" },
+      "targets": [
+        {
+          "datasource": { "type": "influxdb", "uid": "InfluxDB" },
+          "query": "from(bucket: \"mvi-bucket\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"mvi_edge\") |> sort(columns: [\"_time\"], desc: true) |> limit(n: 50)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "timeseries",
+      "title": "Score por tipo de objeto",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 10 },
+      "datasource": { "type": "influxdb", "uid": "InfluxDB" },
+      "targets": [
+        {
+          "datasource": { "type": "influxdb", "uid": "InfluxDB" },
+          "query": "from(bucket: \"mvi-bucket\") |> range(start: -1h) |> filter(fn: (r) => r._measurement == \"mvi_edge\") |> filter(fn: (r) => r._field == \"score\")",
+          "refId": "A"
+        }
+      ]
+    }
+  ]
+}
